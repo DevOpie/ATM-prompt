@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM Prompt</title>
+</head>
+<body>
+    <script>
+        let accountBalance = 5000;
+
+        function displayMenu() {
+            let choice = prompt(`
+                Welcome to Muneef MFB!
+                Select an Operation
+                1. Check balance
+                2. Airtime recharge
+                3. Transaction
+            `);
+
+            if (choice == '1') { 
+                alert("Your account balance is: #" + accountBalance);
+            } else if (choice == '2') { 
+                let airtime = prompt(`
+                    1. Airtime (self)
+                    2. Airtime (Others)
+                    3. cancel
+                `);
+
+                if (airtime == '1') { 
+                    let amountRecharge = prompt('Enter the amount you want to recharge!');
+                    alert('You have successfully recharged: #' + amountRecharge);
+                } else if (airtime == '2') { 
+                    let phoneNumber = prompt('Enter the Phone number to be recharged!');
+                    let amountRecharge = prompt('Enter the amount you want to recharge!');
+                    alert('You have successfully recharged #' + amountRecharge + ' for ' + phoneNumber);
+                } else if (airtime == '3') { 
+                    // Go back to the main menu
+                    displayMenu();
+                }
+
+            } else if (choice == '3') { 
+                let transactionRequest = prompt(`
+                    Select your Transaction:
+                    1. Withdrawal
+                    2. Deposit
+                    3. Cancel
+                `);
+
+                if (transactionRequest == '1') { 
+                    // Perform withdrawal
+                    let withdrawal = parseFloat(prompt("Enter the amount you want to withdraw")); // Parse as float
+                    if (withdrawal <= accountBalance) {
+                        accountBalance -= withdrawal;
+                        alert ('you have successfully withdrawn #' + withdrawal + ' And your Account balance is #' + accountBalance);
+                    } else {
+                        alert("Insufficient funds.");
+                    }
+                } else if (transactionRequest == '2') { 
+                    // Perform Deposit
+                    let deposit = parseFloat(prompt('Enter the Amount to be Deposited')); // Parse as float
+                    accountBalance += deposit;
+                    alert('You have deposited #' + deposit + " And your Account balance is #" + accountBalance);
+                } else if (transactionRequest == '3') { 
+                    // Go back to the main menu
+                    displayMenu();
+                }
+            }
+        }
+
+        // Start the ATM simulation
+        displayMenu();
+    </script>
+</body>
+</html>
